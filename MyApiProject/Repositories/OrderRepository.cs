@@ -14,6 +14,7 @@ namespace MyApiProject.Repositories
 
         public async Task<Order> CreateAsync(Order order)
         {
+            
             order.OrderNumber = $"ORD-{Guid.NewGuid():N}".ToUpper();
             _ctx.Orders.Add(order);
             await _ctx.SaveChangesAsync();

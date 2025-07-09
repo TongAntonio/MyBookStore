@@ -11,11 +11,24 @@ namespace MyApiProject.Controllers
         private readonly IOrderService _svc;
         public OrdersController(IOrderService svc) => _svc = svc;
 
-        [HttpPost]
+        // POST /api/Orders/create
+         [HttpPost("create")]
         public async Task<ActionResult<Order>> Create([FromBody] Order order)
         {
             var created = await _svc.CreateAsync(order);
             return CreatedAtAction(nameof(GetAll), new { id = created.OrderId }, created);
+        }
+
+         // POST /api/Orders
+        [HttpPost]
+        public IActionResult Post([FromBody] Order order)
+        {
+            if (order == null) 
+                return BadRequest("Order body is null");
+
+            // ... บันทึก order, กำหนด ID ฯลฯ
+            order.OrderId = new Random().Next(1, 1000);
+            return CreatedAtAction(nameof(Post), new { id = order.OrderId }, order);
         }
 
         [HttpGet]
@@ -24,5 +37,6 @@ namespace MyApiProject.Controllers
             var orders = await _svc.GetAllAsync();
             return Ok(orders);
         }
+   
     }
 }

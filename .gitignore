@@ -505,3 +505,6 @@ yarn-error.log*
 .idea/
 
 !MyApiProject/**
+# Angular build / deps
+my-book-store/node_modules/
+my-book-store/dist/

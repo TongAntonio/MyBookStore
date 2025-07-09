@@ -1,22 +1,20 @@
-// src/app/services/order.service.ts
-
-import { Injectable }      from '@angular/core';
-import { HttpClient }      from '@angular/common/http';
-import { Observable }      from 'rxjs';
-import { Order }           from '../models/order.model';
-import { OrderCreateDto }  from '../models/order-create-dto.model';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { Order } from '../models/order.model';
 
 @Injectable({ providedIn: 'root' })
 export class OrderService {
-  private apiUrl = 'http://localhost:5002/api/orders';
+  private base = `${environment.apiUrl}/orders`;
 
   constructor(private http: HttpClient) {}
 
-  create(dto: OrderCreateDto): Observable<Order> {
-    return this.http.post<Order>(this.apiUrl, dto);
+  create(order: Partial<Order>): Observable<Order> {
+    return this.http.post<Order>(this.base, order);
   }
 
   getAll(): Observable<Order[]> {
-    return this.http.get<Order[]>(this.apiUrl);
+    return this.http.get<Order[]>(this.base);
   }
 }
