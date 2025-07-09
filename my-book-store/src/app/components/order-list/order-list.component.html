@@ -1,0 +1,21 @@
+<h2>Your Orders</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Order No</th>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Store</th>
+      <th>Total Paid</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let o of orders">
+      <td>{{ o.orderNumber }}</td>
+      <td>{{ o.title }}</td>
+      <td>{{ o.price | currency:'THB' }}</td>
+      <td>{{ o.store }}</td>
+      <td>{{ o.totalPaid | currency:'THB' }}</td>
+    </tr>
+  </tbody>
+</table>

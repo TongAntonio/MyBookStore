@@ -1,0 +1,65 @@
+<!-- src/app/components/book-list/book-list.component.html -->
+<div class="book-list-container">
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <input
+      class="search-input"
+      type="text"
+      placeholder="ค้นหาหนังสือตามชื่อ..."
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="applyFilters()"
+    />
+
+    <div class="filters">
+      <button
+        class="filter-btn"
+        [class.active]="storeFilter === 'All'"
+        (click)="onFilter('All')"
+      >ทั้งหมด</button>
+      <button
+        class="filter-btn"
+        [class.active]="storeFilter === 'Greta'"
+        (click)="onFilter('Greta')"
+      >Greta</button>
+      <button
+        class="filter-btn"
+        [class.active]="storeFilter === 'Peter'"
+        (click)="onFilter('Peter')"
+      >Peter</button>
+    </div>
+
+    <select
+      class="sort-select"
+      [(ngModel)]="sortBy"
+      (change)="onSort(sortBy)"
+    >
+      <option value="title">เรียงตามชื่อ</option>
+      <option value="author">เรียงตามผู้เขียน</option>
+      <option value="price">เรียงตามราคา</option>
+    </select>
+  </div>
+
+  <!-- Book Table -->
+  <table class="book-table">
+    <thead>
+      <tr>
+        <th>ชื่อหนังสือ</th>
+        <th>ผู้เขียน</th>
+        <th>ราคา (THB)</th>
+        <th>ร้าน</th>
+        <th>สั่งซื้อ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of filtered">
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.price | number:'1.0-2' }}</td>
+        <td>{{ book.store }}</td>
+        <td>
+          <button class="buy-btn" (click)="buy(book)">ซื้อเลย</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
