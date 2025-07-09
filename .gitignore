@@ -504,3 +504,4 @@ yarn-error.log*
 .vscode/
 .idea/
 
+!MyApiProject/**
